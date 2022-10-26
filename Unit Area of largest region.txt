@@ -1,0 +1,45 @@
+{
+    public:
+    void dfs(vector<vector<int>> &grid,vector<vector<int>> &visi,int i,int j,int &ct)
+    {
+        
+        if(i>=grid.size() or j>=grid[0].size() or i<0 or j<0 or visi[i][j]==1 or grid[i][j]==0)
+        return ;
+        
+        visi[i][j]=1;
+        ct=ct+1;
+        
+        dfs(grid,visi,i-1,j-1,ct);
+        dfs(grid,visi,i-1,j,ct);
+        dfs(grid,visi,i-1,j+1,ct);
+        dfs(grid,visi,i,j-1,ct);
+        dfs(grid,visi,i,j+1,ct);
+        dfs(grid,visi,i+1,j-1,ct);
+        dfs(grid,visi,i+1,j,ct);
+        dfs(grid,visi,i+1,j+1,ct);
+     
+        return ;   
+    }
+    int findMaxArea(vector<vector<int>>& grid) {
+        int n=grid.size();
+        int m=grid[0].size();
+        vector<vector<int>> visi(n,vector<int> (m,0));
+        
+        int ans=0;
+        
+        for(int i=0;i<n;i++)
+        {
+            for(int j=0;j<m;j++)
+            {
+                if(visi[i][j]==0 and grid[i][j]==1)
+                {
+                    int ct=0;
+                    dfs(grid,visi,i,j,ct);
+                    ans=max(ans,ct);
+                }
+            }
+        }
+        
+        return ans;
+    }
+};
