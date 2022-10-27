@@ -1,0 +1,34 @@
+class Solution {
+public:
+    string simplifyPath(string path)
+    {
+        stack<string> st;
+      stringstream ss(path);
+        string s;
+        string ans="";
+        while(getline(ss,s,'/'))
+        {
+            if(!st.empty() && s==".."){
+                st.pop();
+            }
+            else if(s==".") continue;
+            else if(s!=".." and s.size()>0)
+                st.push(s);
+        }
+    
+        
+        while(!st.empty())
+        {
+            //cout<<(st.top())<<" ";
+            ans="/"+st.top()+ans;
+            //cout<<ans<<endl;
+            st.pop();
+        }
+        if(ans.size()==0)
+            ans+="/";
+       // cout<<endl;
+        
+    return  ans;
+        
+    }
+};
