@@ -1,0 +1,48 @@
+
+
+// User function template for C++
+
+
+
+//Function to insert string into TRIE.
+void insert(struct TrieNode *root, string key)
+{
+    struct TrieNode *t;
+    t=root;
+    int i=0;
+    int n=key.size()-1;
+    while(key[i]!='\0')
+    {
+      if(t->children[key[i]-'a']==NULL)
+      {
+          struct TrieNode *r=getNode();
+          t->children[key[i]-'a']=r;
+      }
+      t=t->children[key[i]-'a'];
+      i++;
+    }
+    
+    t->isLeaf=true;
+}
+
+//Function to use TRIE data structure and search the given string.
+bool search(struct TrieNode *root, string key) 
+{
+    struct TrieNode *t;
+    t=root;
+    int i=0,n=key.size()-1;
+    while(key[i]!='\0')
+    {
+        
+        if(t->children[key[i]-'a']==NULL)
+        {
+            return false;
+        }
+        
+        t=t->children[key[i]-'a'];
+        i++;
+    }
+    
+    return t->isLeaf;
+    // code here
+}
